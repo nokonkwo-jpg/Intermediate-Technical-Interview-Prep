@@ -29,19 +29,19 @@ print_linked_list(n1)
 #U - return the frquency of each value
 # M - similar to frequency map problems
 # P loop through the list. the value that we see is key, and freq is value.
-class SongNode:
-    def __init__(self, song, artist, next=None):
-        self.song = song
-        self.artist = artist
-        self.next = next
+# class SongNode:
+#     def __init__(self, song, artist, next=None):
+#         self.song = song
+#         self.artist = artist
+#         self.next = next
 
-# For testing
-def print_linked_list(node):
-    current = node
-    while current:
-        print((current.song, current.artist), end=" -> " if current.next else "")
-        current = current.next
-    print()
+# # For testing
+# def print_linked_list(node):
+#     current = node
+#     while current:
+#         print((current.song, current.artist), end=" -> " if current.next else "")
+#         current = current.next
+#     print()
 
 '''
 def get_artist_frequency(playlist):
@@ -102,6 +102,7 @@ playlist = SongNode("SOS", "ABBA",
 
 print_linked_list(remove_song(playlist, "Dreams"))'
 '''
+'''
 # P - loop through the list. for each node you see, put it in the set. If you see a node again
 # remove from set and return true, else false
 class SongNode:
@@ -136,4 +137,81 @@ song2.next = song3
 song3.next = song4
 song4.next = song2
 
-print(on_repeat(song1))
+print(on_repeat(song1))'
+'''
+
+class Node:
+	def __init__(self, value, next=None):
+		self.value = value
+		self.next = next
+
+# For testing
+def print_queue(head):
+    current = head.front
+    while current:
+        print(current.value, end=" -> " if current.next else "")
+        current = current.next
+    print()
+
+class Queue:
+    def __init__(self):
+        self.front = None
+        self.rear = None
+    
+    def is_empty(self):
+        return self.front is None
+
+    def enqueue(self, node_tuple):
+        new_node = Node(node_tuple)
+        if self.rear:
+            
+            if not self.front:
+                self.front = new_node
+                 
+            self.rear.next = new_node
+        else: 
+            #  rear = 1, 2, 3
+            #  new_node = 1 -> None
+            #  new_node.next = rear  == 1, 1, 2, 3
+            new_node.next = self.rear
+            self.rear = new_node
+        
+    # current queue = 1, 2, 3, 4, 5
+    # removing front means = 2, 3, 4, 5
+    # if current queue is empty, return None
+    #P - take front set its pointer = front.next
+    def dequeue(self):
+        if not self.is_empty():
+            self.front = self.front.next
+        
+    
+    def peek(self):
+        if self.is_empty():
+            return None
+        return self.front.value
+
+
+# Create a new Queue
+q = Queue()
+
+# Add elements to the queue
+q.enqueue(('Love Song', 'Sara Bareilles'))
+q.enqueue(('Ballad of Big Nothing', 'Elliot Smith'))
+q.enqueue(('Hug from a Dinosaur', 'Torres'))
+print_queue(q)
+
+# View the front element
+print("Peek: ", q.peek()) 
+
+# Remove elements from the queue
+print("Dequeue: ", q.dequeue()) 
+print("Dequeue: ", q.dequeue()) 
+
+# Check if the queue is empty
+print("Is Empty: ", q.is_empty()) 
+
+# Remove the last element
+print("Dequeue: ", q.dequeue()) 
+
+# Check if the queue is empty
+print("Is Empty:", q.is_empty()) 

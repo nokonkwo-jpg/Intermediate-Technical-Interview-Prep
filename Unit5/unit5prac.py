@@ -25,6 +25,16 @@ class SinglyLinkedList:
             print(f"[ {current.data} ] → ", end="")
             current = current.next
         print("None")
+#U - the problem wants us to find the middle node of a singly linked list
+#M - very similar two pointer: fast slow
+#P - initialize two fast and slow. while the fast is not and fast.next is not None. loop through iterate throught
+#the list fast = fast.next.next slow = slow.next. return is slow
+    def get_middle_node(self):
+        fast = slow = self.head
+        while fast and fast.next is not None:
+            fast = fast.next.next
+            slow = slow.next
+        return slow.data
 
 # Create a linked list and insert some elements
 linked_list = SinglyLinkedList()
@@ -34,4 +44,5 @@ linked_list.insert_at_end(30)
 linked_list.insert_at_end(40)
 
 # Print the linked list
-linked_list.print_list()
+print(linked_list.get_middle_node())
+
